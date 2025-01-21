@@ -1,4 +1,7 @@
 package com.appclass.app.room
 
-class FacturasDatabase {
+import androidx.room.RoomDatabase
+
+abstract class FacturasDatabase: RoomDatabase() {
+    abstract fun facturasDao(): FacturasDatabaseDao
 }
