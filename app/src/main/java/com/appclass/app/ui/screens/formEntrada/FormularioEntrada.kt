@@ -58,7 +58,7 @@ fun CamposFormulario(modifier: Modifier = Modifier){
     ) {
         Spacer(modifier = Modifier.size(75.dp))
         Text(
-            text = "Datos de reserva",
+            text = "Formulario de facturas",
             //style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
             fontSize = 32.sp,
@@ -69,7 +69,7 @@ fun CamposFormulario(modifier: Modifier = Modifier){
 
 
         Text(
-            text = "3. Datos de Domicilio",
+            text = "1. Datos del Emisor",
             //style = MaterialTheme.typography.titleSmall.copy(color = Color(0xFF00B0FF)),
             //style = MaterialTheme.typography.titleLarge, //titleLarge va a hacer referencia al FontWeight_Bold
             fontSize = 16.sp,
@@ -84,57 +84,112 @@ fun CamposFormulario(modifier: Modifier = Modifier){
         var dni by remember { mutableStateOf("") }
 
 
-        // Campos de entrada
-        OutlinedTextField(
-            value = domicilio,
-            onValueChange = { domicilio = it },
-            modifier = Modifier
-                .fillMaxWidth(),
-            //.height(56.dp),
-            singleLine = true,
-            label = { Text("Domicilio actual") },
-            shape = MaterialTheme.shapes.large.copy(all = CornerSize(50.dp)),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = GrisOutlined,
-                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
-                focusedLabelColor = GrisOutlined,
-                unfocusedLabelColor = GrisOutlined,
-                cursorColor = GrisOutlined
+//        // Campos de entrada
+//        OutlinedTextField(
+//            value = domicilio,
+//            onValueChange = { domicilio = it },
+//            modifier = Modifier
+//                .fillMaxWidth(),
+//            //.height(56.dp),
+//            singleLine = true,
+//            label = { Text("Empresa") },
+//            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+//            colors = OutlinedTextFieldDefaults.colors(
+//                focusedBorderColor = GrisOutlined,
+//                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
+//                focusedLabelColor = GrisOutlined,
+//                unfocusedLabelColor = GrisOutlined,
+//                cursorColor = GrisOutlined
+//            )
+//        )
+//
+//        Spacer(modifier = Modifier.height(8.dp))
+//
+//        OutlinedTextField(
+//            value = ciudad,
+//            onValueChange = { ciudad = it },
+//            modifier = Modifier
+//                .fillMaxWidth(),
+//            //.height(56.dp),
+//            label = { Text("NIF") },
+//            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+//            colors = OutlinedTextFieldDefaults.colors(
+//                focusedBorderColor = GrisOutlined,
+//                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
+//                focusedLabelColor = GrisOutlined,
+//                unfocusedLabelColor = GrisOutlined,
+//                cursorColor = GrisOutlined
+//            )
+//        )
+//
+//        Spacer(modifier = Modifier.height(8.dp))
+//
+//        OutlinedTextField(
+//            value = provincia,
+//            onValueChange = { provincia = it },
+//            modifier = Modifier
+//                .fillMaxWidth(),
+//            //.height(56.dp),
+//            label = { Text("Dirección") },
+//            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+//            colors = OutlinedTextFieldDefaults.colors(
+//                focusedBorderColor = GrisOutlined,
+//                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
+//                focusedLabelColor = GrisOutlined,
+//                unfocusedLabelColor = GrisOutlined,
+//                cursorColor = GrisOutlined
+//            )
+//        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre elementos
+        ) {
+            OutlinedTextField(
+                value = domicilio,
+                onValueChange = { domicilio = it },
+                modifier = Modifier
+                    .weight(1f), // Ocupa la mitad del espacio disponible
+                singleLine = true,
+                label = { Text("Empresa") },
+                shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = GrisOutlined,
+                    unfocusedBorderColor = GrisOutlined,
+                    focusedLabelColor = GrisOutlined,
+                    unfocusedLabelColor = GrisOutlined,
+                    cursorColor = GrisOutlined
+                )
             )
-        )
+
+            OutlinedTextField(
+                value = ciudad,
+                onValueChange = { ciudad = it },
+                modifier = Modifier
+                    .weight(1f), // Ocupa la otra mitad del espacio disponible
+                label = { Text("NIF") },
+                shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = GrisOutlined,
+                    unfocusedBorderColor = GrisOutlined,
+                    focusedLabelColor = GrisOutlined,
+                    unfocusedLabelColor = GrisOutlined,
+                    cursorColor = GrisOutlined
+                )
+            )
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        OutlinedTextField(
-            value = ciudad,
-            onValueChange = { ciudad = it },
-            modifier = Modifier
-                .fillMaxWidth(),
-            //.height(56.dp),
-            label = { Text("Ciudad") },
-            shape = MaterialTheme.shapes.large.copy(all = CornerSize(50.dp)),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = GrisOutlined,
-                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
-                focusedLabelColor = GrisOutlined,
-                unfocusedLabelColor = GrisOutlined,
-                cursorColor = GrisOutlined
-            )
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
+        // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
             value = provincia,
             onValueChange = { provincia = it },
-            modifier = Modifier
-                .fillMaxWidth(),
-            //.height(56.dp),
-            label = { Text("Provincia") },
-            shape = MaterialTheme.shapes.large.copy(all = CornerSize(50.dp)),
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text("Dirección") },
+            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = GrisOutlined,
-                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
+                unfocusedBorderColor = GrisOutlined,
                 focusedLabelColor = GrisOutlined,
                 unfocusedLabelColor = GrisOutlined,
                 cursorColor = GrisOutlined
