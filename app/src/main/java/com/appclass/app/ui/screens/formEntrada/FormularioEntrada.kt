@@ -14,6 +14,8 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -54,7 +56,7 @@ fun CamposFormulario(modifier: Modifier = Modifier){
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 10.dp)
+            .padding(10.dp)
     ) {
         Spacer(modifier = Modifier.size(75.dp))
         Text(
@@ -66,10 +68,66 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             modifier = Modifier.padding(bottom = 63.dp),
         )
 
+        Text(
+            text = "1. Datos de la Factura",
+            //style = MaterialTheme.typography.titleSmall.copy(color = Color(0xFF00B0FF)),
+            //style = MaterialTheme.typography.titleLarge, //titleLarge va a hacer referencia al FontWeight_Bold
+            fontSize = 16.sp,
+            modifier = Modifier.align(Alignment.Start),
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre elementos
+        ) {
+            OutlinedTextField(
+                value = "",
+                onValueChange = { "" },
+                modifier = Modifier
+                    .weight(1f), // Ocupa la mitad del espacio disponible
+                singleLine = true,
+                label = { Text("Nº Factura") },
+                shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = GrisOutlined,
+                    unfocusedBorderColor = GrisOutlined,
+                    focusedLabelColor = GrisOutlined,
+                    unfocusedLabelColor = GrisOutlined,
+                    cursorColor = GrisOutlined
+                )
+            )
 
+            OutlinedTextField(
+                value = "",
+                onValueChange = { "" },
+                modifier = Modifier
+                    .weight(1f), // Ocupa la otra mitad del espacio disponible
+                label = { Text("23/01/25") },
+                shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = GrisOutlined,
+                    unfocusedBorderColor = GrisOutlined,
+                    focusedLabelColor = GrisOutlined,
+                    unfocusedLabelColor = GrisOutlined,
+                    cursorColor = GrisOutlined
+                ),
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.DateRange,
+                        contentDescription = "DateRange Icon",
+                        tint = GrisOutlined
+                    )
+                }
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "1. Datos del Emisor",
+            text = "2. Datos del Emisor",
             //style = MaterialTheme.typography.titleSmall.copy(color = Color(0xFF00B0FF)),
             //style = MaterialTheme.typography.titleLarge, //titleLarge va a hacer referencia al FontWeight_Bold
             fontSize = 16.sp,
@@ -84,62 +142,6 @@ fun CamposFormulario(modifier: Modifier = Modifier){
         var dni by remember { mutableStateOf("") }
 
 
-//        // Campos de entrada
-//        OutlinedTextField(
-//            value = domicilio,
-//            onValueChange = { domicilio = it },
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            //.height(56.dp),
-//            singleLine = true,
-//            label = { Text("Empresa") },
-//            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
-//            colors = OutlinedTextFieldDefaults.colors(
-//                focusedBorderColor = GrisOutlined,
-//                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
-//                focusedLabelColor = GrisOutlined,
-//                unfocusedLabelColor = GrisOutlined,
-//                cursorColor = GrisOutlined
-//            )
-//        )
-//
-//        Spacer(modifier = Modifier.height(8.dp))
-//
-//        OutlinedTextField(
-//            value = ciudad,
-//            onValueChange = { ciudad = it },
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            //.height(56.dp),
-//            label = { Text("NIF") },
-//            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
-//            colors = OutlinedTextFieldDefaults.colors(
-//                focusedBorderColor = GrisOutlined,
-//                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
-//                focusedLabelColor = GrisOutlined,
-//                unfocusedLabelColor = GrisOutlined,
-//                cursorColor = GrisOutlined
-//            )
-//        )
-//
-//        Spacer(modifier = Modifier.height(8.dp))
-//
-//        OutlinedTextField(
-//            value = provincia,
-//            onValueChange = { provincia = it },
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            //.height(56.dp),
-//            label = { Text("Dirección") },
-//            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
-//            colors = OutlinedTextFieldDefaults.colors(
-//                focusedBorderColor = GrisOutlined,
-//                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
-//                focusedLabelColor = GrisOutlined,
-//                unfocusedLabelColor = GrisOutlined,
-//                cursorColor = GrisOutlined
-//            )
-//        )
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre elementos
@@ -166,7 +168,7 @@ fun CamposFormulario(modifier: Modifier = Modifier){
                 onValueChange = { ciudad = it },
                 modifier = Modifier
                     .weight(1f), // Ocupa la otra mitad del espacio disponible
-                label = { Text("NIF") },
+                label = { Text("NIF/CIF") },
                 shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = GrisOutlined,
@@ -179,6 +181,76 @@ fun CamposFormulario(modifier: Modifier = Modifier){
         }
 
         Spacer(modifier = Modifier.height(8.dp))
+
+        // Campo Dirección ocupa todo el ancho
+        OutlinedTextField(
+            value = "",
+            onValueChange = { "" },
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text("Dirección") },
+            shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = GrisOutlined,
+                unfocusedBorderColor = GrisOutlined,
+                focusedLabelColor = GrisOutlined,
+                unfocusedLabelColor = GrisOutlined,
+                cursorColor = GrisOutlined
+            )
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "3. Datos del Receptor",
+            //style = MaterialTheme.typography.titleSmall.copy(color = Color(0xFF00B0FF)),
+            //style = MaterialTheme.typography.titleLarge, //titleLarge va a hacer referencia al FontWeight_Bold
+            fontSize = 16.sp,
+            modifier = Modifier.align(Alignment.Start),
+
+            )
+
+
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre elementos
+        ) {
+            OutlinedTextField(
+                value = domicilio,
+                onValueChange = { domicilio = it },
+                modifier = Modifier
+                    .weight(1f), // Ocupa la mitad del espacio disponible
+                singleLine = true,
+                label = { Text("Empresa") },
+                shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = GrisOutlined,
+                    unfocusedBorderColor = GrisOutlined,
+                    focusedLabelColor = GrisOutlined,
+                    unfocusedLabelColor = GrisOutlined,
+                    cursorColor = GrisOutlined
+                )
+            )
+
+            OutlinedTextField(
+                value = ciudad,
+                onValueChange = { ciudad = it },
+                modifier = Modifier
+                    .weight(1f), // Ocupa la otra mitad del espacio disponible
+                label = { Text("NIF/CIF") },
+                shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = GrisOutlined,
+                    unfocusedBorderColor = GrisOutlined,
+                    focusedLabelColor = GrisOutlined,
+                    unfocusedLabelColor = GrisOutlined,
+                    cursorColor = GrisOutlined
+                )
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
@@ -197,41 +269,9 @@ fun CamposFormulario(modifier: Modifier = Modifier){
         )
 
 
-
         Spacer(modifier = Modifier.size(32.dp))
 
-        Text(
-            text = "4. Otros datos:",
-            //style = MaterialTheme.typography.titleSmall.copy(color = Color(0xFF00B0FF)),
-            //fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            modifier = Modifier.align(Alignment.Start)
-        )
 
-        OutlinedTextField(
-            value = dni,
-            onValueChange = { dni = it },
-            modifier = Modifier
-                .fillMaxWidth(),
-            //.height(56.dp),
-            label = { Text("DNI/NIE") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-            shape = MaterialTheme.shapes.large.copy(all = CornerSize(50.dp)),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = GrisOutlined,
-                unfocusedBorderColor = GrisOutlined,//color del borde - 0xFF8a9196
-                focusedLabelColor = GrisOutlined,
-                unfocusedLabelColor = GrisOutlined,
-                cursorColor = GrisOutlined
-            ),
-//            leadingIcon = {
-//                Icon(
-//                    imageVector = Icons.Default.,
-//                    contentDescription = "Phone Icon",
-//                    tint = GrisOutlined //aqui para el cambio de color
-//                )
-//            }
-        )
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -257,11 +297,11 @@ fun CamposFormulario(modifier: Modifier = Modifier){
                     .padding(top = 8.dp)
                     .height(50.dp)
             ) {
-                Text("enviar", color = Color.White, fontSize = 18.sp)
+                Text("siguiente", color = Color.White, fontSize = 18.sp)
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
-                    Icons.Default.Send,
-                    contentDescription = "enviar formulario",
+                    Icons.Default.KeyboardArrowRight,
+                    contentDescription = "siguiente - parte 2 formulario",
                     tint = Color.White
                 )
             }
@@ -277,7 +317,7 @@ fun LlamadaFunciones(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 10.dp)
+            .padding(16.dp)
     ){
         CamposFormulario(modifier = Modifier)
     }
