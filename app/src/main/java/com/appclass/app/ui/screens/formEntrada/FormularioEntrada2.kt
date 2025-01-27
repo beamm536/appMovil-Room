@@ -45,6 +45,7 @@ import com.appclass.app.ui.theme.GrisOutlined
 fun FormularioEntrada2(viewModel: FormularioEntrada2ViewModel) {
 
     LlamadaFunciones2(
+        viewModel,
         modifier = Modifier
             .fillMaxSize()
         //.padding(16.dp)
@@ -52,7 +53,7 @@ fun FormularioEntrada2(viewModel: FormularioEntrada2ViewModel) {
 }
 
 @Composable
-fun CamposFormulario2(modifier: Modifier = Modifier){
+fun CamposFormulario2(modifier: Modifier = Modifier, viewModel: FormularioEntrada2ViewModel){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -81,8 +82,8 @@ fun CamposFormulario2(modifier: Modifier = Modifier){
 
         // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
-            value = "",
-            onValueChange = { "" },
+            value = "" /*viewModel.baseImponible.value*/,
+            onValueChange = { /*viewModel.baseImponible.value = it*/ },
             modifier = Modifier.fillMaxWidth(),
             label = { Text("Base imponible €") },
             shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
@@ -99,8 +100,8 @@ fun CamposFormulario2(modifier: Modifier = Modifier){
 
         // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
-            value = "",
-            onValueChange = { "" },
+            value = /*viewModel.iva.value*/"",
+            onValueChange = { "" /*viewModel.iva.value = it*/ },
             modifier = Modifier.fillMaxWidth(),
             label = { Text("IVA %") },
             shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
@@ -156,7 +157,7 @@ fun CamposFormulario2(modifier: Modifier = Modifier){
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ){
             Button(
-                onClick = { /* Acción de siguiente */ },
+                onClick = { /*viewModel.guardarFactura()*/ },
                 colors = ButtonDefaults.buttonColors(Color(0xFF3F51B5)),
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
@@ -179,6 +180,7 @@ fun CamposFormulario2(modifier: Modifier = Modifier){
 
 @Composable
 fun LlamadaFunciones2(
+    viewModel: FormularioEntrada2ViewModel,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -186,6 +188,6 @@ fun LlamadaFunciones2(
             .fillMaxSize()
             .padding(16.dp)
     ){
-        CamposFormulario2(modifier = Modifier)
+        CamposFormulario2(modifier = Modifier, viewModel)
     }
 }

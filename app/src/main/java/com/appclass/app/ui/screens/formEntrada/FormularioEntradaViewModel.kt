@@ -4,16 +4,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.appclass.app.room.FacturaEntity
-import com.appclass.app.room.dao.EmisorDao
 import com.appclass.app.room.dao.FacturasDao
-import com.appclass.app.room.dao.ReceptorDao
 import kotlinx.coroutines.launch
 
 class FormularioEntradaViewModel(
     //por parametro las entidades que vamos a usar
-    private val facturasDao: FacturasDao,
-    private val emisorDao: EmisorDao,
-    private val receptorDao: ReceptorDao
+    private val facturasDao: FacturasDao
 ): ViewModel() {
 
     var numeroFactura = mutableStateOf("")
@@ -28,26 +24,16 @@ class FormularioEntradaViewModel(
     fun guardarFactura() {
         viewModelScope.launch {
             val factura = FacturaEntity(
-                id = 0, // Room autogenera el ID
                 numeroFactura = numeroFactura.value,
-                fecha = fechaFactura.value
+                fecha = fechaFactura.value,
+                emisorEmpresa = emisorEmpresa.value,
+                emisorNifCif = emisorNifCif.value,
+                emisorDireccion = emisorDireccion.value,
+                receptorEmpresa = receptorEmpresa.value,
+                receptorNifCif = receptorNifCif.value,
+                receptorDireccion = receptorDireccion.value
             )
-            val emisor = EmisorEntity(
-                id = 0,
-                nombreEmpresa = emisorEmpresa.value,
-                nifCif = emisorNifCif.value,
-                direccion = emisorDireccion.value
-            )
-            val receptor = ReceptorEntity(
-                id = 0,
-                nombreEmpresa = receptorEmpresa.value,
-                nifCif = receptorNifCif.value,
-                direccion = receptorDireccion.value
-            )
-
             facturasDao.insertFactura(factura)
-            emisorDao.insertEmisor(emisor)
-            receptorDao.insertReceptor(receptor)
         }
     }
 }
