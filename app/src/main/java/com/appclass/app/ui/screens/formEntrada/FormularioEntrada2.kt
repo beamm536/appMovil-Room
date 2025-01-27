@@ -82,8 +82,8 @@ fun CamposFormulario2(modifier: Modifier = Modifier, viewModel: FormularioEntrad
 
         // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
-            value = viewModel.baseImponible.value,
-            onValueChange = { viewModel.baseImponible.value = it },
+            value = "" /*viewModel.baseImponible.value*/,
+            onValueChange = { /*viewModel.baseImponible.value = it*/ },
             modifier = Modifier.fillMaxWidth(),
             label = { Text("Base imponible €") },
             shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
@@ -100,8 +100,8 @@ fun CamposFormulario2(modifier: Modifier = Modifier, viewModel: FormularioEntrad
 
         // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
-            value = viewModel.iva.value,
-            onValueChange = { viewModel.iva.value = it },
+            value = /*viewModel.iva.value*/"",
+            onValueChange = { "" /*viewModel.iva.value = it*/ },
             modifier = Modifier.fillMaxWidth(),
             label = { Text("IVA %") },
             shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
@@ -157,7 +157,7 @@ fun CamposFormulario2(modifier: Modifier = Modifier, viewModel: FormularioEntrad
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ){
             Button(
-                onClick = { viewModel.guardarFactura() },
+                onClick = { /*viewModel.guardarFactura()*/ },
                 colors = ButtonDefaults.buttonColors(Color(0xFF3F51B5)),
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
