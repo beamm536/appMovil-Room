@@ -36,6 +36,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.appclass.app.ui.theme.GrisOutlined
 
 
@@ -51,7 +53,7 @@ fun FormularioEntrada(viewModel: FormularioEntradaViewModel) {
 }
 
 @Composable
-fun CamposFormulario(modifier: Modifier = Modifier){
+fun CamposFormulario(modifier: Modifier = Modifier, viewModel: FormularioEntradaViewModel){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -80,8 +82,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre elementos
         ) {
             OutlinedTextField(
-                value = "",
-                onValueChange = { "" },
+                value = viewModel.numeroFactura.value,
+                onValueChange = { viewModel.numeroFactura.value = it },
                 modifier = Modifier
                     .weight(1f), // Ocupa la mitad del espacio disponible
                 singleLine = true,
@@ -97,8 +99,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             )
 
             OutlinedTextField(
-                value = "",
-                onValueChange = { "" },
+                value = viewModel.fechaFactura.value,
+                onValueChange = { viewModel.fechaFactura.value = it },
                 modifier = Modifier
                     .weight(1f), // Ocupa la otra mitad del espacio disponible
                 label = { Text("23/01/25") },
@@ -135,11 +137,6 @@ fun CamposFormulario(modifier: Modifier = Modifier){
 
         )
 
-        // Variables del formulario para la base de datos
-        var domicilio by remember { mutableStateOf("") }
-        var ciudad by remember { mutableStateOf("") }
-        var provincia by remember { mutableStateOf("") }
-        var dni by remember { mutableStateOf("") }
 
 
         Row(
@@ -147,8 +144,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre elementos
         ) {
             OutlinedTextField(
-                value = domicilio,
-                onValueChange = { domicilio = it },
+                value = viewModel.emisorEmpresa.value,
+                onValueChange = { viewModel.emisorEmpresa.value = it },
                 modifier = Modifier
                     .weight(1f), // Ocupa la mitad del espacio disponible
                 singleLine = true,
@@ -164,8 +161,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             )
 
             OutlinedTextField(
-                value = ciudad,
-                onValueChange = { ciudad = it },
+                value = viewModel.emisorNifCif.value,
+                onValueChange = { viewModel.emisorNifCif.value = it },
                 modifier = Modifier
                     .weight(1f), // Ocupa la otra mitad del espacio disponible
                 label = { Text("NIF/CIF") },
@@ -184,8 +181,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
 
         // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
-            value = "",
-            onValueChange = { "" },
+            value = viewModel.emisorDireccion.value,
+            onValueChange = { viewModel.emisorDireccion.value = it },
             modifier = Modifier.fillMaxWidth(),
             label = { Text("Dirección") },
             shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
@@ -217,8 +214,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre elementos
         ) {
             OutlinedTextField(
-                value = domicilio,
-                onValueChange = { domicilio = it },
+                value = viewModel.receptorEmpresa.value,
+                onValueChange = { viewModel.receptorEmpresa.value = it },
                 modifier = Modifier
                     .weight(1f), // Ocupa la mitad del espacio disponible
                 singleLine = true,
@@ -234,8 +231,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             )
 
             OutlinedTextField(
-                value = ciudad,
-                onValueChange = { ciudad = it },
+                value = viewModel.receptorNifCif.value,
+                onValueChange = { viewModel.receptorNifCif.value = it },
                 modifier = Modifier
                     .weight(1f), // Ocupa la otra mitad del espacio disponible
                 label = { Text("NIF/CIF") },
@@ -254,8 +251,8 @@ fun CamposFormulario(modifier: Modifier = Modifier){
 
         // Campo Dirección ocupa todo el ancho
         OutlinedTextField(
-            value = provincia,
-            onValueChange = { provincia = it },
+            value = viewModel.receptorDireccion.value,
+            onValueChange = { viewModel.receptorDireccion.value = it },
             modifier = Modifier.fillMaxWidth(),
             label = { Text("Dirección") },
             shape = MaterialTheme.shapes.large.copy(all = CornerSize(10.dp)),
@@ -289,7 +286,7 @@ fun CamposFormulario(modifier: Modifier = Modifier){
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ){
             Button(
-                onClick = { /* Acción de siguiente */ },
+                onClick = { viewModel.guardarFactura()  },
                 colors = ButtonDefaults.buttonColors(Color(0xFF3F51B5)),
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
@@ -319,6 +316,6 @@ fun LlamadaFunciones(
             .fillMaxSize()
             .padding(16.dp)
     ){
-        CamposFormulario(modifier = Modifier)
+        CamposFormulario(modifier = Modifier, viewModel = viewModel())
     }
 }
