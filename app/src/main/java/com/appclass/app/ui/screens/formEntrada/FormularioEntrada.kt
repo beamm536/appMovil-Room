@@ -46,6 +46,7 @@ import com.appclass.app.ui.theme.GrisOutlined
 fun FormularioEntrada(viewModel: FormularioEntradaViewModel) {
 
     LlamadaFunciones(
+        viewModel,
         modifier = Modifier
             .fillMaxSize()
             //.padding(16.dp)
@@ -309,6 +310,7 @@ fun CamposFormulario(modifier: Modifier = Modifier, viewModel: FormularioEntrada
 
 @Composable
 fun LlamadaFunciones(
+    viewModel: FormularioEntradaViewModel,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -316,6 +318,6 @@ fun LlamadaFunciones(
             .fillMaxSize()
             .padding(16.dp)
     ){
-        CamposFormulario(modifier = Modifier, viewModel = viewModel())
+        CamposFormulario(modifier = Modifier, viewModel = viewModel)
     }
 }

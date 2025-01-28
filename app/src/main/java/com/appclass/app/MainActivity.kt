@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                 navController = rememberNavController()
-                NavigationWrapper(navController)
+                NavigationWrapper(navController = navController)
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    Greeting(
 //                        name = "Android",
